@@ -44,7 +44,8 @@ class Migration(migrations.Migration):
                 ('legal_basis', models.CharField(blank=True, max_length=255, null=True)),
                 ('anniversary_date', models.DateField(blank=True, null=True)),
                 ('geographical_unit', models.ForeignKey(
-                    on_delete=django.db.models.deletion.CASCADE, related_name='provinces', to='regions.geographicunit')),
+                    on_delete=django.db.models.deletion.CASCADE, related_name='provinces',
+                    to='regions.geographicunit')),
             ],
         ),
         migrations.CreateModel(
@@ -55,7 +56,8 @@ class Migration(migrations.Migration):
                 ('sni_code', models.CharField(blank=True, max_length=3, null=True)),
                 ('name', models.CharField(max_length=100)),
                 ('type', models.PositiveSmallIntegerField(
-                    choices=[(1, 'Kabupaten'), (2, 'Kota'), (3, 'Kabupaten Administratif'), (4, 'Kota Administratif')])),
+                    choices=[(1, 'Kabupaten'), (2, 'Kota'), (3, 'Kabupaten Administratif'),
+                             (4, 'Kota Administratif')])),
                 ('capital_name', models.CharField(blank=True, max_length=100, null=True)),
                 ('nickname', models.CharField(blank=True, max_length=255, null=True)),
                 ('motto', models.CharField(blank=True, max_length=255, null=True)),
@@ -63,13 +65,17 @@ class Migration(migrations.Migration):
                 ('legal_basis', models.CharField(blank=True, max_length=255, null=True)),
                 ('anniversary_date', models.DateField(blank=True, null=True)),
                 ('vehicle_plate_prefix', models.CharField(
-                    blank=True, help_text="The optional prefix of the plate number (e.g., 'AB', 'BC', 'CD').", max_length=2, null=True)),
+                    blank=True, help_text="The optional prefix of the plate number (e.g., 'AB', 'BC', 'CD').",
+                    max_length=2, null=True)),
                 ('vehicle_plate_suffix', models.CharField(
-                    blank=True, help_text="The optional suffix of the plate number (e.g., 'D', 'V', 'Z').", max_length=50, null=True)),
+                    blank=True, help_text="The optional suffix of the plate number (e.g., 'D', 'V', 'Z').",
+                    max_length=50, null=True)),
                 ('capital', models.ForeignKey(
                     blank=True, help_text='Optional reference if the capital is a district.', null=True,
-                    on_delete=django.db.models.deletion.SET_NULL, related_name='regency_capitals', to='regions.district')),
-                ('province', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='regencies', to='regions.province')),
+                    on_delete=django.db.models.deletion.SET_NULL, related_name='regency_capitals',
+                    to='regions.district')),
+                ('province', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                               related_name='regencies', to='regions.province')),
             ],
         ),
         migrations.AddField(
@@ -82,7 +88,8 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='district',
             name='regency',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='districts', to='regions.regency'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, related_name='districts', to='regions.regency'),
         ),
         migrations.CreateModel(
             name='Village',
@@ -92,10 +99,14 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=100)),
                 ('type', models.PositiveSmallIntegerField(choices=[(1, 'Desa'), (2, 'Kelurahan')])),
                 ('gis_area', models.DecimalField(
-                    blank=True, decimal_places=2, help_text='Area in square kilometers from GIS data.', max_digits=10, null=True)),
+                    blank=True, decimal_places=2, help_text='Area in square kilometers from GIS data.',
+                    max_digits=10, null=True)),
                 ('bps_area', models.DecimalField(
-                    blank=True, decimal_places=2, help_text='Area in square kilometers from BPS data.', max_digits=10, null=True)),
-                ('district', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='villages', to='regions.district')),
+                    blank=True, decimal_places=2, help_text='Area in square kilometers from BPS data.',
+                    max_digits=10, null=True)),
+                ('district', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, related_name='villages',
+                    to='regions.district')),
             ],
         ),
         migrations.AddField(
@@ -103,6 +114,7 @@ class Migration(migrations.Migration):
             name='capital',
             field=models.ForeignKey(
                 blank=True, help_text='Optional reference if the capital is a village.',
-                null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='district_capitals', to='regions.village'),
+                null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='district_capitals',
+                to='regions.village'),
         ),
     ]

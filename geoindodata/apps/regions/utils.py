@@ -1,5 +1,5 @@
 import datetime
-from django.db.models import Q, Sum, F, Value, ExpressionWrapper, IntegerField
+from django.db.models import Q, Sum, F, ExpressionWrapper, IntegerField
 
 from geoindodata.apps.regions.models import District, Regency, Province
 from geoindodata.apps.demographics.models import Population
@@ -105,7 +105,7 @@ def get_population(self: Union[District, Province, Regency], source: str = "bps"
                 base_query = base_query.filter(village__district__regency__province=self)
 
             year_query = base_query.filter(
-                Q(fetched_at__gte=start_date) & 
+                Q(fetched_at__gte=start_date) &
                 Q(fetched_at__lte=end_date)
             )
 
