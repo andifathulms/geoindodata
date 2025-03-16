@@ -7,7 +7,7 @@ from geoindodata.apps.demographics.models import Population
 from typing import Optional
 
 
-def get_population(self, source: str = "bps", year: Optional[int] = None, fetched_at: Optional[str] = None,
+def get_population(source: str = "bps", year: Optional[int] = None, fetched_at: Optional[str] = None,
                    gender: str = "total") -> int:
     """
     Return the total population under this [district/regency/province] from the specified source.
