@@ -4,11 +4,11 @@ from django.db.models import Q, Sum, F, Value, ExpressionWrapper, IntegerField
 from geoindodata.apps.regions.models import District, Regency, Province
 from geoindodata.apps.demographics.models import Population
 
-from typing import Optional
+from typing import Optional, Union
 
 
-def get_population(source: str = "bps", year: Optional[int] = None, fetched_at: Optional[str] = None,
-                   gender: str = "total") -> int:
+def get_population(self: Union[District, Province, Regency], source: str = "bps", year: Optional[int] = None,
+                   fetched_at: Optional[str] = None, gender: str = "total") -> int:
     """
     Return the total population under this [district/regency/province] from the specified source.
 
