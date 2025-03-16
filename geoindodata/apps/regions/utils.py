@@ -21,7 +21,7 @@ def get_population(self, source: str = "bps", year: Optional[int] = None, fetche
     Returns the most recent data if no year/date is specified.
     """
 
-    source_id = dict([(v, k) for k, v in Population.SOURCE_TYPE])[source]
+    source_id = dict([(v, k) for k, v in Population.SOURCE])[source]
 
     # Base query depends on the model type
     if isinstance(self, District):

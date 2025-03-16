@@ -44,6 +44,6 @@ class Population(models.Model):
         return f"{self.village.name} - {total} ({self.get_source_display()} {date_info})"
 
     @property
-    def total(self):
+    def total(self) -> int:
         """Return the total population (male + female)."""
         return self.male_count + self.female_count
