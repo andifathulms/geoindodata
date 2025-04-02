@@ -32,6 +32,8 @@ class Province(models.Model):
 
     nickname = models.CharField(max_length=255, blank=True, null=True)
     motto = models.CharField(max_length=255, blank=True, null=True)
+    motto_language = models.CharField(max_length=100, blank=True, null=True)
+    motto_translation = models.CharField(max_length=255, blank=True, null=True)
     established_date = models.DateField(blank=True, null=True)
     legal_basis = models.CharField(max_length=255, blank=True, null=True)
     anniversary_date = models.DateField(blank=True, null=True)
@@ -120,6 +122,8 @@ class Regency(models.Model):
 
     nickname = models.CharField(max_length=255, blank=True, null=True)
     motto = models.CharField(max_length=255, blank=True, null=True)
+    motto_language = models.CharField(max_length=100, blank=True, null=True)
+    motto_translation = models.CharField(max_length=255, blank=True, null=True)
     established_date = models.DateField(blank=True, null=True)
     legal_basis = models.CharField(max_length=255, blank=True, null=True)
     anniversary_date = models.DateField(blank=True, null=True)
