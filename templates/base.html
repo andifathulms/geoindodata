@@ -35,13 +35,12 @@
                 
                 <!-- Main Navigation -->
                 <nav class="hidden md:flex items-center space-x-1">
-                    <a href="#" class="px-4 py-2 rounded-lg hover:bg-blue-500/20 transition-all font-medium text-blue-100 hover:text-white">Beranda</a>
-                    <a href="{% url 'regions:geographic_units:index' %}" class="px-4 py-2 rounded-lg hover:bg-blue-500/20 transition-all font-medium text-blue-100 hover:text-white">Unit Geografis</a>
-                    <a href="#" class="px-4 py-2 rounded-lg hover:bg-blue-500/20 transition-all font-medium text-blue-100 hover:text-white">Provinsi</a>
-                    <a href="#" class="px-4 py-2 rounded-lg hover:bg-blue-500/20 transition-all font-medium text-blue-100 hover:text-white">Kabupaten/Kota</a>
-                    <a href="#" class="px-4 py-2 rounded-lg hover:bg-blue-500/20 transition-all font-medium text-blue-100 hover:text-white">Kecamatan</a>
-                    <a href="#" class="px-4 py-2 rounded-lg hover:bg-blue-500/20 transition-all font-medium text-blue-100 hover:text-white">Desa/Kelurahan</a>
                     <a href="#" class="px-4 py-2 rounded-lg bg-blue-500/10 border border-blue-400/30 hover:bg-blue-500/20 transition-all font-medium text-white">Dashboard</a>
+                    <a href="{% url 'regions:geographic_units:index' %}" class="px-4 py-2 rounded-lg hover:bg-blue-500/20 transition-all font-medium text-blue-100 hover:text-white">Geographical Unit</a>
+                    <a href="{% url 'regions:provinces:index' %}" class="px-4 py-2 rounded-lg hover:bg-blue-500/20 transition-all font-medium text-blue-100 hover:text-white">Province</a>
+                    <a href="#" class="px-4 py-2 rounded-lg hover:bg-blue-500/20 transition-all font-medium text-blue-100 hover:text-white">Regency</a>
+                    <a href="#" class="px-4 py-2 rounded-lg hover:bg-blue-500/20 transition-all font-medium text-blue-100 hover:text-white">District</a>
+                    <a href="#" class="px-4 py-2 rounded-lg hover:bg-blue-500/20 transition-all font-medium text-blue-100 hover:text-white">Village</a>
                 </nav>
                 
                 <!-- User Menu -->
@@ -85,13 +84,12 @@
             <!-- Mobile Navigation -->
             <div class="md:hidden pb-4" x-data="{ open: false }" x-show="open" x-transition style="display: none;">
                 <div class="flex flex-col space-y-2">
-                    <a href="#" class="px-4 py-2 rounded-lg hover:bg-blue-500/20 transition-all font-medium text-blue-100 hover:text-white">Beranda</a>
-                    <a href="{% url 'regions:geographic_units:index' %}" class="px-4 py-2 rounded-lg hover:bg-blue-500/20 transition-all font-medium text-blue-100 hover:text-white">Unit Geografis</a>
-                    <a href="#" class="px-4 py-2 rounded-lg hover:bg-blue-500/20 transition-all font-medium text-blue-100 hover:text-white">Provinsi</a>
-                    <a href="#" class="px-4 py-2 rounded-lg hover:bg-blue-500/20 transition-all font-medium text-blue-100 hover:text-white">Kabupaten/Kota</a>
-                    <a href="#" class="px-4 py-2 rounded-lg hover:bg-blue-500/20 transition-all font-medium text-blue-100 hover:text-white">Kecamatan</a>
-                    <a href="#" class="px-4 py-2 rounded-lg hover:bg-blue-500/20 transition-all font-medium text-blue-100 hover:text-white">Desa/Kelurahan</a>
                     <a href="#" class="px-4 py-2 rounded-lg bg-blue-500/10 border border-blue-400/30 hover:bg-blue-500/20 transition-all font-medium text-white">Dashboard</a>
+                    <a href="{% url 'regions:geographic_units:index' %}" class="px-4 py-2 rounded-lg hover:bg-blue-500/20 transition-all font-medium text-blue-100 hover:text-white">Geographical Unit</a>
+                    <a href="{% url 'regions:provinces:index' %}" class="px-4 py-2 rounded-lg hover:bg-blue-500/20 transition-all font-medium text-blue-100 hover:text-white">Province</a>
+                    <a href="#" class="px-4 py-2 rounded-lg hover:bg-blue-500/20 transition-all font-medium text-blue-100 hover:text-white">Regency</a>
+                    <a href="#" class="px-4 py-2 rounded-lg hover:bg-blue-500/20 transition-all font-medium text-blue-100 hover:text-white">District</a>
+                    <a href="#" class="px-4 py-2 rounded-lg hover:bg-blue-500/20 transition-all font-medium text-blue-100 hover:text-white">Village</a>
                     
                     {% if user.is_authenticated %}
                         <hr class="border-blue-500/30 my-2">

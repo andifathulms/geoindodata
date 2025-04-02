@@ -2,20 +2,20 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render
 
-from geoindodata.apps.regions.models import GeographicUnit
+from geoindodata.apps.regions.models import Province
 
 
 def index(request: HttpRequest) -> HttpResponse:
-    units = GeographicUnit.objects.order_by('id')
+    provinces = Province.objects.select_related('geographical_unit').order_by('regional_code')
 
-    paginator = Paginator(units, 10)
+    paginator = Paginator(provinces, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
     context = {
-        'title': 'Geographical Units',
-        'geographic_units': page_obj.object_list,
+        'title': 'Provinces',
+        'provinces': page_obj.object_list,
         'page_obj': page_obj,
         'is_paginated': page_obj.has_other_pages(),
     }
-    return render(request, 'regions/geographic_units/index.html', context)
+    return render(request, 'regions/provinces/index.html', context)
