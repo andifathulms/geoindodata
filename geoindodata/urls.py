@@ -23,6 +23,7 @@ from .views import index
 urlpatterns = [
     path('', index),
     path('admin/', admin.site.urls),
+    path('regions/', include('geoindodata.regions.urls')),
 ]
 
 if settings.DEBUG:
