@@ -4,8 +4,10 @@ from django.db import models
 from django.db.models import Q, Sum, F
 
 from model_utils import Choices
+from thumbnails.fields import ImageField
 
 from geoindodata.apps.demographics.models import Population
+from geoindodata.core.utils import FilenameGenerator
 
 from decimal import Decimal
 from typing import Optional
@@ -37,6 +39,9 @@ class Province(models.Model):
     established_date = models.DateField(blank=True, null=True)
     legal_basis = models.CharField(max_length=255, blank=True, null=True)
     anniversary_date = models.DateField(blank=True, null=True)
+
+    flag = ImageField(upload_to=FilenameGenerator(prefix='provinces'), blank=True, null=True)
+    coat_of_arms = ImageField(upload_to=FilenameGenerator(prefix='provinces'), blank=True, null=True)
 
     def __str__(self) -> str:
         return self.name
@@ -133,6 +138,9 @@ class Regency(models.Model):
         help_text="The optional prefix of the plate number (e.g., 'AB', 'BC', 'CD').")
     vehicle_plate_suffix = models.CharField(max_length=50, blank=True, null=True,
                                             help_text="The optional suffix of the plate number (e.g., 'D', 'V', 'Z').")
+
+    flag = ImageField(upload_to=FilenameGenerator(prefix='regencies'), blank=True, null=True)
+    coat_of_arms = ImageField(upload_to=FilenameGenerator(prefix='regencies'), blank=True, null=True)
 
     def __str__(self) -> str:
         return f"{self.name} ({self.get_type_display()})"
