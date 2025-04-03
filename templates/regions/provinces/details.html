@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ province.name }} - GeoIndoData{% endblock %}
+
+{% block breadcrumb %}
+    <span class="mx-2">/</span>
+    <a href="{% url 'regions:provinces:index' %}" class="text-blue-600 hover:text-blue-800 transition-colors">Province</a>
+    <span class="mx-2">/</span>
+    <span class="text-blue-600">{{ province.name }}</span>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Header Section -->
+    <div class="mb-8">
+        <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
+            <!-- Coat of Arms -->
+            <div class="flex-shrink-0 bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                {% if province.coat_of_arms %}
+                <img src="{{ province.coat_of_arms.url }}" 
+                     alt="Lambang {{ province.name }}"
+                     class="h-40 w-auto object-contain mx-auto">
+                {% else %}
+                <div class="h-40 w-32 flex items-center justify-center bg-gray-100 rounded">
+                    <span class="text-gray-400">No coat of arms</span>
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Province Info -->
+            <div class="flex-grow">
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ province.name }}</h1>
+                
+                {% if province.nickname %}
+                <div class="text-lg text-gray-600 mb-2">
+                    <span class="font-medium">Nickname:</span> {{ province.nickname }}
+                </div>
+                {% endif %}
+                
+                {% if province.motto %}
+                <div class="mb-2">
+                    <p class="text-lg italic">
+                        "{{ province.motto }}"
+                        {% if province.motto_language %}
+                        <span class="text-sm not-italic text-gray-500">({{ province.motto_language }})</span>
+                        {% endif %}
+                    </p>
+                    {% if province.motto_translation %}
+                    <p class="text-gray-600">"{{ province.motto_translation }}"</p>
+                    {% endif %}
+                </div>
+                {% endif %}
+                
+                <div class="flex flex-wrap gap-4 mt-4">
+                    <div class="bg-blue-50 px-3 py-1 rounded-full text-sm font-medium text-blue-800">
+                        Regional Code: {{ province.regional_code }}
+                    </div>
+                    <div class="bg-green-50 px-3 py-1 rounded-full text-sm font-medium text-green-800">
+                        ISO: {{ province.iso_code }}
+                    </div>
+                    <div class="bg-purple-50 px-3 py-1 rounded-full text-sm font-medium text-purple-800">
+                        Geographical Unit: {{ province.geographical_unit.name }}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Flag -->
+            <div class="flex-shrink-0 bg-white p-2 rounded-lg shadow-md border border-gray-200">
+                {% if province.flag %}
+                <img src="{{ province.flag.url }}" 
+                     alt="Bendera {{ province.name }}"
+                     class="h-32 w-auto object-contain mx-auto">
+                {% else %}
+                <div class="h-32 w-48 flex items-center justify-center bg-gray-100 rounded">
+                    <span class="text-gray-400">No flag</span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Left Column -->
+        <div class="lg:col-span-2 space-y-6">
+            <!-- Basic Information Card -->
+            <div class="bg-white shadow rounded-lg overflow-hidden border border-gray-200">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h2 class="text-xl font-semibold text-gray-800">Basic Information</h2>
+                </div>
+                <div class="px-6 py-4">
+                    <dl class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="col-span-1 py-2">
+                            <dt class="text-sm font-medium text-gray-500">Capital City</dt>
+                            <dd class="mt-1 text-sm text-gray-900">
+                                {{ province.capital_name|default:"-" }}
+                                {% if province.capital %}
+                                <a href="#" class="text-blue-600 hover:underline ml-1">(Detail)</a>
+                                {% endif %}
+                            </dd>
+                        </div>
+                        <div class="col-span-1 py-2">
+                            <dt class="text-sm font-medium text-gray-500">Established Date</dt>
+                            <dd class="mt-1 text-sm text-gray-900">
+                                {{ province.established_date|date:"d F Y"|default:"-" }}
+                            </dd>
+                        </div>
+                        <div class="col-span-1 py-2">
+                            <dt class="text-sm font-medium text-gray-500">Anniversary Date</dt>
+                            <dd class="mt-1 text-sm text-gray-900">
+                                {% if province.anniversary_date %}
+                                    {% if province.anniversary_date == province.established_date %}
+                                        Same with established date
+                                    {% else %}
+                                        {{ province.anniversary_date|date:"d F Y" }}
+                                    {% endif %}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </dd>
+                        </div>
+                        <div class="col-span-1 py-2">
+                            <dt class="text-sm font-medium text-gray-500">Legal Basis</dt>
+                            <dd class="mt-1 text-sm text-gray-900">
+                                {{ province.legal_basis|default:"-" }}
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+
+            <!-- Statistics Card -->
+            <div class="bg-white shadow rounded-lg overflow-hidden border border-gray-200">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h2 class="text-xl font-semibold text-gray-800">Statistics</h2>
+                </div>
+                <div class="px-6 py-4">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="text-center p-3 bg-blue-50 rounded-lg">
+                            <div class="text-2xl font-bold text-blue-700">{{ province.regencies.count }}</div>
+                            <div class="text-sm text-gray-600">Regency</div>
+                        </div>
+                        <div class="text-center p-3 bg-green-50 rounded-lg">
+                            <div class="text-2xl font-bold text-green-700">{{ province.district_count }}</div>
+                            <div class="text-sm text-gray-600">District</div>
+                        </div>
+                        <div class="text-center p-3 bg-purple-50 rounded-lg">
+                            <div class="text-2xl font-bold text-purple-700">{{ province.village_count }}</div>
+                            <div class="text-sm text-gray-600">Village</div>
+                        </div>
+                        <div class="text-center p-3 bg-yellow-50 rounded-lg">
+                            <div class="text-2xl font-bold text-yellow-700">100</div>
+                            <div class="text-sm text-gray-600">Population</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="space-y-6">
+            <!-- Map Placeholder -->
+            <div class="bg-white shadow rounded-lg overflow-hidden border border-gray-200">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h2 class="text-xl font-semibold text-gray-800">Maps</h2>
+                </div>
+                <div class="p-4 h-64 bg-gray-100 flex items-center justify-center">
+                    <p class="text-gray-500">Province maps will be shown here</p>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="bg-white shadow rounded-lg overflow-hidden border border-gray-200">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h2 class="text-xl font-semibold text-gray-800">Quick Links</h2>
+                </div>
+                <div class="p-4">
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#" class="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition">
+                                <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                </svg>
+                                List of Regencies
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition">
+                                <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+                                </svg>
+                                Demographic Data
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition">
+                                <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                Complete Statistics
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
