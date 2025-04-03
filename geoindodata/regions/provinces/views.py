@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpRequest
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from geoindodata.apps.regions.models import Province
 
@@ -19,3 +19,9 @@ def index(request: HttpRequest) -> HttpResponse:
         'is_paginated': page_obj.has_other_pages(),
     }
     return render(request, 'regions/provinces/index.html', context)
+
+
+def details(request: HttpRequest, pk: int) -> HttpResponse:
+    province = get_object_or_404(Province.objects.select_related('geographical_unit'), pk=pk)
+
+    return render(request, 'regions/provinces/details.html', {'province': province})
