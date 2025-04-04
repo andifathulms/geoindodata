@@ -48,7 +48,11 @@ class Province(models.Model):
 
     def regency_count(self) -> int:
         """Return the number of regencies under this province."""
-        return self.regencies.count()
+        return self.regencies.filter(type=Regency.TYPE.kabupaten).count()
+
+    def city_count(self) -> int:
+        """Return the number of cities under this province."""
+        return self.regencies.filter(type=Regency.TYPE.kota).count()
 
     def district_count(self) -> int:
         """Return the total number of districts under this province."""
