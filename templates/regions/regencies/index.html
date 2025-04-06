@@ -74,7 +74,7 @@
                             <div class="text-sm font-medium text-gray-900">{{ regency.get_type_display }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <a href="#">
+                            <a href="{% url 'regions:regencies:details' regency.id %}">
                                 <div class="text-sm font-medium text-gray-900">{{ regency.name }}</div>
                             </a>
                         </td>
