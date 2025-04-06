@@ -147,7 +147,7 @@ class Regency(models.Model):
     coat_of_arms = ImageField(upload_to=FilenameGenerator(prefix='regencies'), blank=True, null=True)
 
     def __str__(self) -> str:
-        return f"{self.name} ({self.get_type_display()})"
+        return f"{self.get_type_display()} {self.name}"
 
     def district_count(self) -> int:
         """Return the total number of districts under this regency."""
