@@ -1,4 +1,4 @@
-Django==5.1.7
+Django==5.2.7
 django-model-utils==5.0.0
 django-redis==5.4.0
 django-tailwind==3.8.0
